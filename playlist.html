@@ -7,185 +7,185 @@
 <body>
 <!-- Main body starts here -->
 <div id="main_body">
-<div id="header">
-<!-- START HEADER JSP -->
-	You are logged in locally as michaellavelle. 
-	<!-- Temporary hack to add space - remove when using CSS -->	
-	&nbsp;
-	<a href="#">Logout</a></p>
-<!-- END HEADER JSP -->
-</div>
-<!-- Insert top part (containing, image, links, buttons etc) here -->
-	<p><a href="playlist.html">Home</a>
-  
-<div class="importButton">
-<input type="submit" onclick="showLoading('Importing...')" id="importExFmLovedSongsSubmit" value="Import ExFm tracks" />
+	<div id="header">
+	<!-- START HEADER JSP -->
+		You are logged in locally as michaellavelle. 
+		<!-- Temporary hack to add space - remove when using CSS -->	
+		&nbsp;
+		<a href="#">Logout</a></p>
+	<!-- END HEADER JSP -->
+	</div>
+	<!-- Insert top part (containing, image, links, buttons etc) here -->
+		<p><a href="playlist.html">Home</a>
+	  
+	<div class="importButton">
+	<input type="submit" onclick="showLoading('Importing...')" id="importExFmLovedSongsSubmit" value="Import ExFm tracks" />
 
-</div>
+	</div>
 
-  
-  
-<div class="importButton">
-
-
-<input type="submit" onclick="showLoading('Importing...')" id="importSoundCloudFavoritesSubmit" value="Import SoundCloud favorites" />
-
-</div>
-
-  
+	  
+	  
+	<div class="importButton">
 
 
+	<input type="submit" onclick="showLoading('Importing...')" id="importSoundCloudFavoritesSubmit" value="Import SoundCloud favorites" />
 
-	<!-- Temporary hack to add space - remove when using CSS -->	
-	&nbsp;
+	</div>
+
+	  
+
+
+
+		<!-- Temporary hack to add space - remove when using CSS -->	
+		&nbsp;
 </div>
 <!-- End Main body -->
 <!-- Content body starts here -->
 <div id="content_body">
-<!-- START CHOOSER JSP-->
-<div id="chooser" >
-	<!-- Don't want to use this hr in real version - just here to divide the page for demo purposes -->	
-	<hr/>
-		Search for new music... 
-		<input type="text" name="q" size=50 />
-		<input id="searchSubmit" onclick="showLoading('Searching...')" type="submit" value="Search"/>
-	<p>
-		...or choose music from your playlists
-	 <select id="playlistNameSelect" name="targetPlaylistName">
-		<option value="january_2013" selected="selected">January 2013</option>
-		<option value="soundcloud_2012">SoundCloud 2012</option>
-	</select>
-	<input id="playlistChangeSubmit" onclick="showLoading('Loading...')" type="submit" value="Show tracks" />
-	<input id="loadSubmit" onclick="showLoading('Loading...')"  type="submit" value="Play this playlist"  />
-</p>
-</div>
-<!-- END CHOOSER JSP -->
-<!-- START RESULTS STATUS JSP -->
-<div id="rsContainer">
+	<!-- START CHOOSER JSP-->
+	<div id="chooser" >
+		<!-- Don't want to use this hr in real version - just here to divide the page for demo purposes -->	
+		<hr/>
+			Search for new music... 
+			<input type="text" name="q" size=50 />
+			<input id="searchSubmit" onclick="showLoading('Searching...')" type="submit" value="Search"/>
+		<p>
+			...or choose music from your playlists
+		 <select id="playlistNameSelect" name="targetPlaylistName">
+			<option value="january_2013" selected="selected">January 2013</option>
+			<option value="soundcloud_2012">SoundCloud 2012</option>
+		</select>
+		<input id="playlistChangeSubmit" onclick="showLoading('Loading...')" type="submit" value="Show tracks" />
+		<input id="loadSubmit" onclick="showLoading('Loading...')"  type="submit" value="Play this playlist"  />
+	</p>
+	</div>
+	<!-- END CHOOSER JSP -->
+	<!-- START RESULTS STATUS JSP -->
+	<div id="rsContainer">
 
-	<div  id="resultsStatus">
+		<div  id="resultsStatus">
+			<!-- Don't want to use this hr in real version - just here to divide the page for demo purposes -->	
+			<hr/>
+
+			<div id="loadedMessage"></div>
+			<center><div id="loadingMessage"></div></center>
+
+		</div>
+	</div>
+	<!-- END RESULTS STATUS JSP -->
+	<!-- START PLAYER CONTAINER JSP -->
+
+	<div id="player">
+	
+		<!--  START PLAYER JSP -->
+	
 		<!-- Don't want to use this hr in real version - just here to divide the page for demo purposes -->	
 		<hr/>
 
-		<div id="loadedMessage"></div>
-		<center><div id="loadingMessage"></div></center>
+		<div id="sc">
+			<iframe id="sc-widget" width="50%" height="160" scrolling="no"
+			frameborder="no" src="#"></iframe>
 
+			<p>
+				<a href="javascript:prevTrack();">Prev Track</a>
+				 <a href="javascript:nextTrack();">Next Track</a>
+			</p>
+		</div>
+
+		<div id="addToPlaylist">
+	
+		<!-- Temporary hack to add space - remove when using CSS -->	
+		&nbsp;&nbsp;&nbsp;
+	
+				Add track to: 
+	
+				 <select id="playlistNameAddToSelect" name="targetPlaylistName">
+					<option value="january_2013" selected="selected">January 2013</option>
+					<option value="soundcloud_2012">SoundCloud 2012</option>
+				</select> 
+	
+					<input type="submit" id="addToPlaylistBuilderSubmit" onclick="showPlayerStatus('Adding...');" value="Add" />
+
+					<input type="submit" id="loveOnExFmSubmit" value="Love on ExFm" onclick="showPlayerStatus('Track loved on Ex.Fm');" /> 
+		</div>
+
+	<!--  END PLAYER JSP-->
 	</div>
-</div>
-<!-- END RESULTS STATUS JSP -->
-<!-- START PLAYER CONTAINER JSP -->
+	<!-- END PLAYER CONTAINER -->
 
-<div id="player">
-	
-	<!--  START PLAYER JSP -->
-	
+	<!-- START PLAYER STATUS -->
+
+	<div id="playerStatus">
+	</div>
+	<!-- END PLAYER STATUS -->
+
+	<!-- START PLAYLIST CONTAINER -->
+
 	<!-- Don't want to use this hr in real version - just here to divide the page for demo purposes -->	
 	<hr/>
 
-	<div id="sc">
-		<iframe id="sc-widget" width="50%" height="160" scrolling="no"
-		frameborder="no" src="#"></iframe>
+	<div id="body" style="text-align: left; width: 40%; float: left;">
+	<!-- START PLAYLIST -->
 
-		<p>
-			<a href="javascript:prevTrack();">Prev Track</a>
-			 <a href="javascript:nextTrack();">Next Track</a>
-		</p>
-	</div>
+		 <select id="playlistNameLoadSelect" name="playlistName">
+			<option value="january_2013" selected="selected">January 2013</option>
+			<option value="soundcloud_2012">SoundCloud 2012</option>
+		</select> 
 
-	<div id="addToPlaylist">
-	
-	<!-- Temporary hack to add space - remove when using CSS -->	
-	&nbsp;&nbsp;&nbsp;
-	
-			Add track to: 
-	
-			 <select id="playlistNameAddToSelect" name="targetPlaylistName">
-				<option value="january_2013" selected="selected">January 2013</option>
-				<option value="soundcloud_2012">SoundCloud 2012</option>
-			</select> 
-	
-				<input type="submit" id="addToPlaylistBuilderSubmit" onclick="showPlayerStatus('Adding...');" value="Add" />
-
-				<input type="submit" id="loveOnExFmSubmit" value="Love on ExFm" onclick="showPlayerStatus('Track loved on Ex.Fm');" /> 
-	</div>
-
-<!--  END PLAYER JSP-->
-</div>
-<!-- END PLAYER CONTAINER -->
-
-<!-- START PLAYER STATUS -->
-
-<div id="playerStatus">
-</div>
-<!-- END PLAYER STATUS -->
-
-<!-- START PLAYLIST CONTAINER -->
-
-<!-- Don't want to use this hr in real version - just here to divide the page for demo purposes -->	
-<hr/>
-
-<div id="body" style="text-align: left; width: 40%; float: left;">
-<!-- START PLAYLIST -->
-
-	 <select id="playlistNameLoadSelect" name="playlistName">
-		<option value="january_2013" selected="selected">January 2013</option>
-		<option value="soundcloud_2012">SoundCloud 2012</option>
-	</select> 
-
-	<input type="submit" id="loadSubmit" value="Load"  onclick="showPlayerStatus('Loading...');" />
+		<input type="submit" id="loadSubmit" value="Load"  onclick="showPlayerStatus('Loading...');" />
 
 
 
-	<h2>January 2013 by <a href="profile.html">michaellavelle</a></h2>
-	<p><img src="http://userserve-ak.last.fm/serve/64/76366626.png"/></p>
+		<h2>January 2013 by <a href="profile.html">michaellavelle</a></h2>
+		<p><img src="http://userserve-ak.last.fm/serve/64/76366626.png"/></p>
 
-	<a target="_blank" href="http://cloudplaylists.com/michaellavelle/january_2013">Open in legacy player</a>
+		<a target="_blank" href="http://cloudplaylists.com/michaellavelle/january_2013">Open in legacy player</a>
 
-	<table class="Playlist">
+		<table class="Playlist">
 
-		<tr id="r0">
-			<td class="segmentListItem" id="n0" ">1</td>
-			<td class="segmentListItem" id="p0">You feat. Aaron Alexis</td>
-			<td><a href="javascript:playTrack(0,'http%3A%2F%2Fsoundcloud.com%2Fmonsieuradi%2Fyou-feat-aaron-alexis');">Play</a></td>
-			<td><input onclick="deleteTrack(0)" type="submit" value="x"></td>
-		</tr>
-		<tr id="r1">
-			<td class="segmentListItem" id="n1" ">2</td>
-			<td class="segmentListItem" id="p1">Solange - Losing You (Cyril Hahn Remix)</td>
-			<td><a href="javascript:playTrack(1,'http%3A%2F%2Fsoundcloud.com%2Fcyrilhahn%2Fsolange-losing-you-cyril-hahn');">Play</a></td>
+			<tr id="r0">
+				<td class="segmentListItem" id="n0" ">1</td>
+				<td class="segmentListItem" id="p0">You feat. Aaron Alexis</td>
+				<td><a href="javascript:playTrack(0,'http%3A%2F%2Fsoundcloud.com%2Fmonsieuradi%2Fyou-feat-aaron-alexis');">Play</a></td>
+				<td><input onclick="deleteTrack(0)" type="submit" value="x"></td>
+			</tr>
+			<tr id="r1">
+				<td class="segmentListItem" id="n1" ">2</td>
+				<td class="segmentListItem" id="p1">Solange - Losing You (Cyril Hahn Remix)</td>
+				<td><a href="javascript:playTrack(1,'http%3A%2F%2Fsoundcloud.com%2Fcyrilhahn%2Fsolange-losing-you-cyril-hahn');">Play</a></td>
 			
-			<td><input onclick="deleteTrack(1)" type="submit" value="x"></td>
-		</tr>
-		<tr id="r2">
-			<td class="segmentListItem" id="n2" ">3</td>
-			<td class="segmentListItem" id="p2">Alpines - Chances (Cyril Hahn Remix)</td>
-			<td><a href="javascript:playTrack(2,'http%3A%2F%2Fsoundcloud.com%2Falpines%2Fchances-cyril-hahn');">Play</a></td>
-			<td><input onclick="deleteTrack(2)" type="submit" value="x"></td>
-		</tr>
+				<td><input onclick="deleteTrack(1)" type="submit" value="x"></td>
+			</tr>
+			<tr id="r2">
+				<td class="segmentListItem" id="n2" ">3</td>
+				<td class="segmentListItem" id="p2">Alpines - Chances (Cyril Hahn Remix)</td>
+				<td><a href="javascript:playTrack(2,'http%3A%2F%2Fsoundcloud.com%2Falpines%2Fchances-cyril-hahn');">Play</a></td>
+				<td><input onclick="deleteTrack(2)" type="submit" value="x"></td>
+			</tr>
 
-		<tr id="r3">
-			<td class="segmentListItem" id="n3" ">4</td>
-			<td class="segmentListItem" id="p3" draggable="true">Destiny&#039;s Child - Say My Name (Cyril Hahn Remix)</td>
-			<td><a href="javascript:playTrack(3,'http%3A%2F%2Fsoundcloud.com%2Fcyrilhahn%2Fdestinys-child-say-my-name');">Play</a></td>
-			<td><input onclick="deleteTrack(3)" type="submit" value="x"></td>
-		</tr>
+			<tr id="r3">
+				<td class="segmentListItem" id="n3" ">4</td>
+				<td class="segmentListItem" id="p3" draggable="true">Destiny&#039;s Child - Say My Name (Cyril Hahn Remix)</td>
+				<td><a href="javascript:playTrack(3,'http%3A%2F%2Fsoundcloud.com%2Fcyrilhahn%2Fdestinys-child-say-my-name');">Play</a></td>
+				<td><input onclick="deleteTrack(3)" type="submit" value="x"></td>
+			</tr>
 
-		<tr id="r4">
-			<td class="segmentListItem" id="n4" ">5</td>
-			<td class="segmentListItem" id="p4" draggable="true">Monsieur Adi - Coming Back To Life (Demo)</td>
-			<td><a href="javascript:playTrack(4,'http%3A%2F%2Fsoundcloud.com%2Fkarmaartists%2Fmonsieur-adi-coming-back-to');">Play</a></td>
-			<td><input onclick="deleteTrack(4)" type="submit" value="x"></td>
-		</tr>
+			<tr id="r4">
+				<td class="segmentListItem" id="n4" ">5</td>
+				<td class="segmentListItem" id="p4" draggable="true">Monsieur Adi - Coming Back To Life (Demo)</td>
+				<td><a href="javascript:playTrack(4,'http%3A%2F%2Fsoundcloud.com%2Fkarmaartists%2Fmonsieur-adi-coming-back-to');">Play</a></td>
+				<td><input onclick="deleteTrack(4)" type="submit" value="x"></td>
+			</tr>
 
-	</table>
+		</table>
 
-	<!-- Temporary hack to add space - remove when using CSS -->	
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
+		<!-- Temporary hack to add space - remove when using CSS -->	
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
 
-<!-- END PLAYLIST -->
-</div>
-<!-- END PLAYLIST CONTAINER -->
+	<!-- END PLAYLIST -->
+	</div>
+	<!-- END PLAYLIST CONTAINER -->
 </div>
 <!-- Content body ends here -->
 </body>
