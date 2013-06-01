@@ -5,17 +5,43 @@
  <script type="text/javascript" src="https://w.soundcloud.com/player/api.js "></script>
 </head>
 <body>
+<!-- Main body starts here -->
+<div id="main_body">
 <div id="header">
 <!-- START HEADER JSP -->
-	<p><a href="playlist.html">Home</a>
-	<!-- Temporary hack to add space - remove when using CSS -->	
-	&nbsp;
 	You are logged in locally as michaellavelle. 
 	<!-- Temporary hack to add space - remove when using CSS -->	
 	&nbsp;
 	<a href="#">Logout</a></p>
 <!-- END HEADER JSP -->
 </div>
+<!-- Insert top part (containing, image, links, buttons etc) here -->
+	<p><a href="playlist.html">Home</a>
+  
+<div class="importButton">
+<input type="submit" onclick="showLoading('Importing...')" id="importExFmLovedSongsSubmit" value="Import ExFm tracks" />
+
+</div>
+
+  
+  
+<div class="importButton">
+
+
+<input type="submit" onclick="showLoading('Importing...')" id="importSoundCloudFavoritesSubmit" value="Import SoundCloud favorites" />
+
+</div>
+
+  
+
+
+
+	<!-- Temporary hack to add space - remove when using CSS -->	
+	&nbsp;
+</div>
+<!-- End Main body -->
+<!-- Content body starts here -->
+<div id="content_body">
 <!-- START CHOOSER JSP-->
 <div id="chooser" >
 	<!-- Don't want to use this hr in real version - just here to divide the page for demo purposes -->	
@@ -31,10 +57,6 @@
 	</select>
 	<input id="playlistChangeSubmit" onclick="showLoading('Loading...')" type="submit" value="Show tracks" />
 	<input id="loadSubmit" onclick="showLoading('Loading...')"  type="submit" value="Play this playlist"  />
-</p>
-<p>
-	<input type="submit" onclick="showLoading('Importing...')" id="importExFmLovedSongsSubmit" value="Import ExFm tracks" />
-	<input type="submit" onclick="showLoading('Importing...')" id="importSoundCloudFavoritesSubmit" value="Import SoundCloud favorites" />
 </p>
 </div>
 <!-- END CHOOSER JSP -->
@@ -62,7 +84,7 @@
 
 	<div id="sc">
 		<iframe id="sc-widget" width="50%" height="160" scrolling="no"
-		frameborder="no" src="http://w.soundcloud.com/player/?url=http%3A%2F%2Fsoundcloud.com%2Fmonsieuradi%2Fyou-feat-aaron-alexis&amp;show_artwork=true&amp;auto_play=false"></iframe>
+		frameborder="no" src="#"></iframe>
 
 		<p>
 			<a href="javascript:prevTrack();">Prev Track</a>
@@ -164,6 +186,8 @@
 <!-- END PLAYLIST -->
 </div>
 <!-- END PLAYLIST CONTAINER -->
+</div>
+<!-- Content body ends here -->
 </body>
 
 
@@ -192,10 +216,18 @@
 // End Results Status JS
 
 // Start Player Container JS
-
 	function playTrack(trackNumberToPlay, encodedUrl) 
 	{
+		playTrackWithAutoplay(trackNumberToPlay,encodedUrl,"true");
+	}
 
+	function playTrackWithAutoplay(trackNumberToPlay, encodedUrl,autoplay) 
+	{
+		if (getUrls()[trackNumberToPlay]["deadLink"])
+		{
+			nextTrack();
+			return;
+		}
 		trackNumber = trackNumberToPlay;
 		
 		var widgetIframe = document.getElementById('sc-widget');
@@ -203,7 +235,7 @@
 		// Stop an error message being displayed while player is loaded by hiding player iframe		
 		widgetIframe.height=0;
 		
-		widgetIframe.src = 'http://w.soundcloud.com/player/?url=' + encodedUrl + '&amp;show_artwork=true&amp;auto_play=true';
+		widgetIframe.src = 'http://w.soundcloud.com/player/?url=' + encodedUrl + '&amp;show_artwork=true&amp;auto_play=' + autoplay;
 		
 		// Redisplay player iFrame on player has loaded
 		widgetIframe.height=160;
@@ -218,7 +250,15 @@
 
 		// Bind the FINISH event to the player - a bug with SoundCloud means that this isn't working currently
 		var widget = SC.Widget(widgetIframe);
-		widget.load(getUrls()[trackNumber],{"auto_play":"true"});
+
+		if ("true" == autoplay)
+		{
+			widget.load(getUrls()[trackNumber]["url"],{"auto_play":autoplay});
+		}
+		else
+		{
+			widget.load(getUrls()[trackNumber]["url"],{});
+		}
 
 	}
 
@@ -242,7 +282,7 @@
 
 	function getUrls()
 	{
-		return ["http%3A%2F%2Fsoundcloud.com%2Fmonsieuradi%2Fyou-feat-aaron-alexis","http%3A%2F%2Fsoundcloud.com%2Fcyrilhahn%2Fsolange-losing-you-cyril-hahn","http%3A%2F%2Fsoundcloud.com%2Falpines%2Fchances-cyril-hahn","http%3A%2F%2Fsoundcloud.com%2Fcyrilhahn%2Fdestinys-child-say-my-name","http%3A%2F%2Fsoundcloud.com%2Fkarmaartists%2Fmonsieur-adi-coming-back-to"];
+		return [{"url":"http%3A%2F%2Fsoundcloud.com%2Fmonsieuradi%2Fyou-feat-aaron-alexis","deadLink":true},{"url":"http%3A%2F%2Fsoundcloud.com%2Fcyrilhahn%2Fsolange-losing-you-cyril-hahn","deadLink":false},{"url":"http%3A%2F%2Fsoundcloud.com%2Falpines%2Fchances-cyril-hahn","deadLink":false},{"url":"http%3A%2F%2Fsoundcloud.com%2Fcyrilhahn%2Fdestinys-child-say-my-name","deadLink":false},{"url":"http%3A%2F%2Fsoundcloud.com%2Fkarmaartists%2Fmonsieur-adi-coming-back-to","deadLink":false}];
 	}
 
 // End Player Status JS
@@ -250,7 +290,17 @@
 // Start Local Playlist JS
 
 	var trackNumber = 0;
-
+	for (var i = 0; i < getUrls().length; i++)
+	{
+		if (getUrls()[i]["deadLink"] == true)
+		{
+			trackNumber++;
+		}
+	}
+	if (trackNumber >= 0)
+	{
+		playTrackWithAutoplay(trackNumber,getUrls()[trackNumber]["url"],"false");
+	}
 	function play()
 	{
 		var widgetIframe = document.getElementById('sc-widget');
@@ -263,16 +313,24 @@
 		 if (trackNumber < maxIndex)
 		 {
 			trackNumber++;
+			if (getUrls()[trackNumber]["deadLink"])
+			{
+				nextTrack();
+			}
 		 }
-		 playTrack(trackNumber,getUrls()[trackNumber]);
+		 playTrack(trackNumber,getUrls()[trackNumber]["url"]);
 	}
 
 	function prevTrack() {
 		 if (trackNumber > 0)
 		 {
 			trackNumber--;
+			if (getUrls()[trackNumber]["deadLink"])
+			{
+				prevTrack();
+			}
 		 }
-		 playTrack(trackNumber,getUrls()[trackNumber]);
+		 playTrack(trackNumber,getUrls()[trackNumber]["url"]);
 	}
 
 	function deleteTrack(trackIndex)
@@ -283,12 +341,14 @@
 
 
 	// Bind the FINISH event to the first track on the player
+
 	var widgetIframe = document.getElementById('sc-widget');
 	var widget = SC.Widget(widgetIframe);
 	widget.bind(SC.Widget.Events.FINISH, nextTrack);
 
 	// Set the CSS of the first track to be selected
-	document.getElementById('r0').className="current";
+	document.getElementById('r' + trackNumber).className="current";
+
 
 	// End Local Playlist JS
 
