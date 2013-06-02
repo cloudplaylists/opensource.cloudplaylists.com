@@ -3,6 +3,10 @@
 <head>
  <link rel="stylesheet" type="text/css" href="cloudplaylists.css">
  <script type="text/javascript" src="https://w.soundcloud.com/player/api.js "></script>
+<!--
+<link rel="stylesheet" type="text/css" href="style.css">
+-->
+
 </head>
 <body>
 <!-- Main body starts here -->
@@ -16,23 +20,26 @@
 	<!-- END HEADER JSP -->
 	</div>
 	<!-- Insert top part (containing, image, links, buttons etc) here -->
-		<p><a href="playlist.html">Home</a>
-	  
-	<div class="importButton">
-	<input type="submit" onclick="showLoading('Importing...')" id="importExFmLovedSongsSubmit" value="Import ExFm tracks" />
+		<div id="top_part">
+			<div id="top_part_image">
+				<div id="main_logo"><h1 class="cloudPlaylists">CloudPlaylists</h1></div>
+				<div id="main_menu_bg1">
+					<div id="main_menu_body1">
+						<div id="menu_links">
+							<a href="playlist.html">Home</a>
+							<div class="importButton">
+								<input type="submit" onclick="showLoading('Importing...')" id="importExFmLovedSongsSubmit" value="Import ExFm tracks" />
 
-	</div>
-
-	  
-	  
-	<div class="importButton">
-
-
-	<input type="submit" onclick="showLoading('Importing...')" id="importSoundCloudFavoritesSubmit" value="Import SoundCloud favorites" />
-
-	</div>
-
-	  
+							</div>
+							<div class="importButton">
+								<input type="submit" onclick="showLoading('Importing...')" id="importSoundCloudFavoritesSubmit" value="Import SoundCloud favorites" />
+							</div>
+						</div>
+					</div>
+				</div>
+			<div>	
+	  	</div>
+	
 
 
 
@@ -83,7 +90,7 @@
 		<hr/>
 
 		<div id="sc">
-			<iframe id="sc-widget" width="50%" height="160" scrolling="no"
+			<iframe id="sc-widget" width="100%" height="160" scrolling="no"
 			frameborder="no" src="#"></iframe>
 
 			<p>
@@ -124,7 +131,7 @@
 	<!-- Don't want to use this hr in real version - just here to divide the page for demo purposes -->	
 	<hr/>
 
-	<div id="body" style="text-align: left; width: 40%; float: left;">
+	<div id="body" style="text-align: left; width: 100%; float: left;">
 	<!-- START PLAYLIST -->
 
 		 <select id="playlistNameLoadSelect" name="playlistName">
@@ -136,7 +143,7 @@
 
 
 
-		<h2>January 2013 by <a href="profile.html">michaellavelle</a></h2>
+		<h1>January 2013 by <a href="profile.html">michaellavelle</a></h1>
 		<p><img src="http://userserve-ak.last.fm/serve/64/76366626.png"/></p>
 
 		<a target="_blank" href="http://cloudplaylists.com/michaellavelle/january_2013">Open in legacy player</a>
